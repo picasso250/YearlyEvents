@@ -50,14 +50,7 @@
             background-color: #2980b9;
         }
 
-        #eventList {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+        
 
         a {
             color: #3498db;
@@ -67,54 +60,7 @@
             text-decoration: underline;
         }
 
-/* Remove list-style from li elements */
-#eventList {
-    list-style: none;
-    padding: 0;
-}
 
-/* Style for the upvote button */
-.upvote-button {
-    padding-top: 4px;
-padding-bottom: 5px;
-padding-left: 8px;
-padding-right: 6px;
-    font-size: 12px;
-    background-color: #e74c3c; /* Warmer color, you can adjust it */
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 3px; /* Rounded corners */
-}
-
-.upvote-button:hover {
-    background-color: #c0392b; /* Darker shade on hover */
-}
-
-/* Style for the event-list-item-year badge */
-.event-list-item .year {
-    display: inline-block;
-    padding: 4px 8px;
-    font-size: 12px;
-    background-color: #3498db; /* Original color, you can adjust it */
-    color: #fff;
-    border-radius: 4px;
-    margin-right: 4px;
-}
-
-/* Add some margin or padding to li elements for better spacing */
-li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #fff; /* Background color for li elements */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation effect */
-}
-li div {
-    margin-top: 1px;
-}
 p {
   padding: 0;
   line-height: 1.6;
@@ -172,7 +118,68 @@ p {
         <button id="addButton">添加</button>
     </div>
     
+<style>
+    #eventList {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+}
 
+/* Style for the upvote button */
+.upvote-button {
+    padding-top: 4px;
+padding-bottom: 5px;
+padding-left: 8px;
+padding-right: 6px;
+    font-size: 12px;
+    background-color: #e74c3c; /* Warmer color, you can adjust it */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 3px; /* Rounded corners */
+}
+
+.upvote-button:hover {
+    background-color: #c0392b; /* Darker shade on hover */
+}
+
+/* Style for the event-list-item-year badge */
+.event-list-item .year {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: #3498db; /* Original color, you can adjust it */
+    color: #fff;
+    border-radius: 4px;
+    margin-right: 4px;
+}
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff; /* Background color for li elements */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation effect */
+}
+li div {
+    margin-top: 1px;
+}
+    .edit-button {
+    font-size: small; /* 设置字体大小为非常小 */
+    float: right; /* 将按钮靠右浮动 */
+    padding: 4px 5px;
+    background: transparent;
+    color: #333;
+}
+.edit-button:hover{
+    background-color: #cfd6f5;;
+}
+</style>
     <div id="eventList">
         <!-- Event items will be displayed here -->
     </div>
