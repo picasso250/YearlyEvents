@@ -2,159 +2,219 @@
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
 // Smart contract address and ABI
-const contractAddress = "0xbCB889B2ee030af249DadAef6080424c012294C2"; 
+const contractAddress = "0x545a738B0fE236f069219b9EfD9509742b727C50";
 const contractABI = [
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint16",
-				"name": "year",
-				"type": "uint16"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "eventId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "creator",
-				"type": "address"
-			}
-		],
-		"name": "EventCreated",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint16",
-				"name": "year",
-				"type": "uint16"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "eventId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "voter",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "votes",
-				"type": "uint256"
-			}
-		],
-		"name": "Voted",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "year",
-				"type": "uint16"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			}
-		],
-		"name": "createEvent",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "year",
-				"type": "uint16"
-			},
-			{
-				"internalType": "uint256",
-				"name": "eventId",
-				"type": "uint256"
-			}
-		],
-		"name": "vote",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "",
-				"type": "uint16"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "events",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "votes",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "creator",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "year",
-				"type": "uint16"
-			}
-		],
-		"name": "getEventsCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "eventId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+            }
+        ],
+        "name": "EventCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "eventId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "oldDescription",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "newDescription",
+                "type": "string"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "editor",
+                "type": "address"
+            }
+        ],
+        "name": "EventEdited",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "eventId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "voter",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "votes",
+                "type": "uint256"
+            }
+        ],
+        "name": "Voted",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            },
+            {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            }
+        ],
+        "name": "createEvent",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint256",
+                "name": "eventId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "newDescription",
+                "type": "string"
+            }
+        ],
+        "name": "editEvent",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "events",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "votes",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            }
+        ],
+        "name": "getEventsCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "year",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint256",
+                "name": "eventId",
+                "type": "uint256"
+            }
+        ],
+        "name": "vote",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    }
 ];
 
 // Get the contract instance
@@ -185,57 +245,121 @@ document.getElementById("addButton").addEventListener("click", async () => {
     if (!userAccount) {
         await connectWallet();
     }
-    
+
     try {
         await contract.methods.createEvent(currentYear, input)
             .send({ from: userAccount, value: web3.utils.toWei('0.0001', 'ether') });
-// 0.24$
     } catch (error) {
         console.error("Error storing string:", error);
     }
 });
+function createElement(tag, options) {
+    const element = document.createElement(tag);
+
+    if (options) {
+        // 设置属性
+        if (options.attr) {
+            for (const [key, value] of Object.entries(options.attr)) {
+                element.setAttribute(key, value);
+            }
+        }
+
+        // 添加类名
+        if (options.class) {
+            element.className = options.class;
+        }
+
+        // 设置文本内容
+        if (options.text) {
+            element.textContent = options.text;
+        }
+
+        // 添加子元素
+        if (options.children) {
+            for (const child of options.children) {
+                element.appendChild(child);
+            }
+        }
+
+        // 添加事件监听器
+        if (options.on) {
+            for (const [event, handler] of Object.entries(options.on)) {
+                element.addEventListener(event, handler);
+            }
+        }
+
+        // 设置 HTML 内容
+        if (options.html) {
+            element.innerHTML = options.html;
+        }
+    }
+
+    return element;
+}
 
 function createSpan(className, text) {
-    const span = document.createElement("span");
-    span.className = className;
-    const textNode = document.createTextNode(text);
-    span.appendChild(textNode);
-    return span;
-}
-function createListItem(year, eventId, description, creator, votes) {
-    const listItem = document.createElement("li");
-    listItem.classList.add("event-list-item");
-
-    // Create data attributes containing event ID, creator information, and votes
-    listItem.setAttribute('data-year', year);
-    listItem.setAttribute('data-event-id', eventId);
-    listItem.setAttribute('data-creator', creator);
-    listItem.setAttribute('data-votes', votes.toString()); // Set the provided votes
-
-    const eventInfoDiv = document.createElement("div");
-
-    // Add Upvote button
-    const upvoteButton = document.createElement("button");
-    upvoteButton.classList.add("upvote-button"); // Add a class to the upvote button
-
-    // Get the current votes
-    const currentVotes = parseInt(listItem.getAttribute('data-votes'));
-
-    upvoteButton.innerHTML = `${currentVotes} &#9650;`; // Display the vote count and the upward triangle symbol
-    upvoteButton.addEventListener("click", function () {
-        // Call the vote function and pass year and eventId
-        vote(year, eventId);
+    return createElement('span', {
+        class: className,
+        text: text
     });
+}
 
-    eventInfoDiv.appendChild(upvoteButton);
-    eventInfoDiv.appendChild(createSpan("year", `${year}年`)); // Assuming createSpan is a function you have defined
-    eventInfoDiv.appendChild(createSpan("description", ` ${description}`)); // Assuming createSpan is a function you have defined
+function createListItem(year, eventId, description, creator, votes) {
+    const listItem = createElement('li', {
+        class: 'event-list-item',
+        attr: {
+            'data-year': year,
+            'data-event-id': eventId,
+            'data-creator': creator,
+            'data-votes': votes.toString()
+        },
+        children: [
+            // Create Upvote button
+            createElement('button', {
+                class: 'upvote-button',
+                html: `${votes} &#9650;`, // Display the vote count and the upward triangle symbol
+                children: [],
+                on: {
+                    click: function () {
+                        // Call the vote function and pass year and eventId
+                        vote(year, eventId);
+                    }
+                }
+            }),
+            createSpan('year', `${year}年`),
+            createSpan('description', ` ${description}`)
 
-    listItem.appendChild(eventInfoDiv);
+        ]
+    });
 
     return listItem;
 }
 
+function exportListToJson() {
+    const listItems = document.getElementById('eventList').querySelectorAll('.event-list-item');
+    const exportedData = [];
+
+    listItems.forEach(item => {
+        const year = item.getAttribute('data-year');
+        const eventId = item.getAttribute('data-event-id');
+        const description = item.querySelector('.description').textContent.trim();
+        const creator = item.getAttribute('data-creator');
+        const votes = parseInt(item.getAttribute('data-votes'));
+
+        const listItemData = {
+            year,
+            eventId,
+            description,
+            creator,
+            votes
+        };
+
+        exportedData.push(listItemData);
+    });
+
+    const jsonData = JSON.stringify(exportedData, null, 2);
+    console.log(jsonData);
+}
 
 // 假设你的合约有一个名为`vote`的方法，用于处理投票
 async function vote(year, eventId) {
