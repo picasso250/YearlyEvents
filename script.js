@@ -202,33 +202,34 @@ function createSpan(className, text) {
     span.appendChild(textNode);
     return span;
 }
-function createListItem(year, eventId, description, creator, className) {
+function createListItem(year, eventId, description, creator, votes) {
     const listItem = document.createElement("li");
+    listItem.classList.add("event-list-item");
 
-    // 创建一个包含事件ID、创建者信息和投票数量的data属性
+    // Create data attributes containing event ID, creator information, and votes
     listItem.setAttribute('data-year', year);
     listItem.setAttribute('data-event-id', eventId);
     listItem.setAttribute('data-creator', creator);
-    listItem.setAttribute('data-votes', '0'); // 默认投票数量为0
+    listItem.setAttribute('data-votes', votes.toString()); // Set the provided votes
 
     const eventInfoDiv = document.createElement("div");
 
-    // 添加Upvote按钮
+    // Add Upvote button
     const upvoteButton = document.createElement("button");
     upvoteButton.classList.add("upvote-button"); // Add a class to the upvote button
 
-    // 获取当前投票数量
+    // Get the current votes
     const currentVotes = parseInt(listItem.getAttribute('data-votes'));
 
-    upvoteButton.innerHTML = `${currentVotes} &#9650;`; // 显示投票数量和向上的三角符号
+    upvoteButton.innerHTML = `${currentVotes} &#9650;`; // Display the vote count and the upward triangle symbol
     upvoteButton.addEventListener("click", function () {
-        // 调用vote函数，并传递year和eventId
+        // Call the vote function and pass year and eventId
         vote(year, eventId);
     });
 
     eventInfoDiv.appendChild(upvoteButton);
-    eventInfoDiv.appendChild(createSpan(`${className}-year`, `${year}年`));
-    eventInfoDiv.appendChild(createSpan(`${className}-description`, ` ${description}`));
+    eventInfoDiv.appendChild(createSpan("year", `${year}年`)); // Assuming createSpan is a function you have defined
+    eventInfoDiv.appendChild(createSpan("description", ` ${description}`)); // Assuming createSpan is a function you have defined
 
     listItem.appendChild(eventInfoDiv);
 
@@ -275,12 +276,12 @@ contract.events.EventCreated({
         const existingListItem = document.querySelector(`[data-event-id="${eventId}"][data-year="${year}"]`);
 
         if (existingListItem) {
-            // Event already exists, update the description only
-            existingListItem.querySelector('.event-list-item-description').textContent = description;
+            existingListItem.querySelector('.description').textContent = description;
+            existingListItem.setAttribute('data-creator', creator);
         } else {
             // Create and prepend the new list item
             const eventList = document.getElementById("eventList");
-            const listItem = createListItem(year, eventId, description, creator, 'event-list-item');
+            const listItem = createListItem(year, eventId, description, creator, 0);
             eventList.insertBefore(listItem, eventList.firstChild);
         }
         sortAndRenderList();
@@ -342,7 +343,7 @@ contract.events.Voted({
             upvoteButton.innerHTML = `${votes} &#9650;`;
         } else {
             // Event not found, create and prepend the new list item
-            const listItem = createListItem(year, eventId, '', voter, 'event-list-item');
+            const listItem = createListItem(year, eventId, '', '', votes);
             eventList.insertBefore(listItem, eventList.firstChild);
         }
 
