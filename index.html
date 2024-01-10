@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>纪元大事件（YearlyEvents）</title>
+    <title>年度盛事(YearlyEvents)</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
             color: #333;
-            margin: 0;
             padding: 0;
         }
 
@@ -20,7 +19,6 @@
         }
 
         p {
-            text-align: center;
             max-width: 600px;
             margin: 0 auto;
         }
@@ -77,13 +75,18 @@
 
 /* Style for the upvote button */
 .upvote-button {
-    padding: 6px 10px; /* Adjusted size */
+    padding-top: 4px;
+padding-bottom: 5px;
+padding-left: 10px;
+padding-right: 10px;
+
     font-size: 12px;
     background-color: #e74c3c; /* Warmer color, you can adjust it */
     color: #fff;
     border: none;
     cursor: pointer;
     margin-left: 10px;
+    margin-right: 10px;
     border-radius: 3px; /* Rounded corners */
 }
 
@@ -99,7 +102,7 @@
     background-color: #3498db; /* Original color, you can adjust it */
     color: #fff;
     border-radius: 4px;
-    margin-right: 8px;
+    margin-right: 4px;
 }
 
 /* Add some margin or padding to li elements for better spacing */
@@ -113,28 +116,57 @@ li {
 li div {
     margin-top: 1px;
 }
+p {
+  padding: 0;
+  line-height: 1.6;
+  font-size: 16px;
+  font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+  text-indent: 2em; /* 两个字符的首行缩进，根据需要调整 */
+}
+
+.yearly-events-intro {
+    font-size: 14px;
+    color: #333;
+    /* 添加其他样式属性 */
+}
+.yearly-events-highlight {
+    color: #AD1607; 
+    font-weight: bold;
+}
+.eventContainer {
+    margin: 0 auto; /* 居中 */
+    max-width: 600px; /* 最大宽度 */
+    margin-top: 10px;
+}
+.instructionText {
+    font-size: 14px; /* 更小的字体 */
+    color: #999; /* 更浅的颜色 */
+    text-align: center;
+    text-indent: 0;
+}
 
     </style>
 </head>
 
 <body>
 
-    <h1>纪元大事件（YearlyEvents）</h1>
+    <h1>年度盛事(YearlyEvents)</h1>
 
-    <p>纪元大事件（YearlyEvents）是一款基于区块链技术的产品，旨在创建一个不可删除、不受审查的年度事件记录平台。通过区块链的去中心化特性，YearlyEvents确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，YearlyEvents都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。</p>
+    <p class="yearly-events-intro">年度盛事(YearlyEvents)是一款基于区块链技术的产品，旨在创建一个<span class="yearly-events-highlight">不可删除、不受审查</span>的年度事件记录平台。通过区块链的去中心化特性，年度盛事确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，年度盛事都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。</p>
 
-    <div>
+    <div class="eventContainer">
         <label for="eventInput">添加事件：</label>
         <input type="text" id="eventInput" placeholder="输入事件描述">
         <button id="addButton">添加</button>
     </div>
+    
 
     <div id="eventList">
         <!-- Event items will be displayed here -->
     </div>
 
-    <p>请先安装MetaMask(小狐狸)插件，并切换到 Sepolia 测试链。
-        确保你有足够的测试币，你可以从<a href="https://sepoliafaucet.com/" target="_blank">Sepolia Faucet</a>获取测试币。</p>
+    <p class="instructionText">请先安装MetaMask(小狐狸)插件，并切换到 Sepolia 测试链。确保你有足够的测试币，你可以从<a href="https://sepoliafaucet.com/" target="_blank">Sepolia Faucet</a>获取测试币。</p>
+
 
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <script src="script.js"></script>

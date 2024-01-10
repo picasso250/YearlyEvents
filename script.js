@@ -212,8 +212,6 @@ function createListItem(year, eventId, description, creator, className) {
     listItem.setAttribute('data-votes', '0'); // 默认投票数量为0
 
     const eventInfoDiv = document.createElement("div");
-    eventInfoDiv.appendChild(createSpan(`${className}-year`, `${year}`));
-    eventInfoDiv.appendChild(createSpan(`${className}-description`, ` ${description}`));
 
     // 添加Upvote按钮
     const upvoteButton = document.createElement("button");
@@ -229,6 +227,8 @@ function createListItem(year, eventId, description, creator, className) {
     });
 
     eventInfoDiv.appendChild(upvoteButton);
+    eventInfoDiv.appendChild(createSpan(`${className}-year`, `${year}年`));
+    eventInfoDiv.appendChild(createSpan(`${className}-description`, ` ${description}`));
 
     listItem.appendChild(eventInfoDiv);
 
@@ -283,10 +283,41 @@ contract.events.EventCreated({
             const listItem = createListItem(year, eventId, description, creator, 'event-list-item');
             eventList.insertBefore(listItem, eventList.firstChild);
         }
+        sortAndRenderList();
     }
 });
 
-// Listen for Voted events
+function sortAndRenderList() {
+    // 获取事件列表元素
+    const eventList = document.getElementById("eventList");
+
+    // 获取所有列表项并转换为数组
+    const listItems = Array.from(eventList.getElementsByTagName("li"));
+
+    // 按照投票数降序和事件ID倒序排序列表项数组
+    listItems.sort((a, b) => {
+        const votesA = parseInt(a.getAttribute('data-votes')) || 0;
+        const votesB = parseInt(b.getAttribute('data-votes')) || 0;
+        const eventIdA = parseInt(a.getAttribute('data-event-id')) || 0;
+        const eventIdB = parseInt(b.getAttribute('data-event-id')) || 0;
+
+        if (votesB !== votesA) {
+            // 如果投票数不相等，按投票数降序
+            return votesB - votesA;
+        } else {
+            // 如果投票数相等，按事件ID倒序
+            return eventIdB - eventIdA;
+        }
+    });
+
+    // 从 DOM 中移除所有列表项
+    listItems.forEach(item => eventList.removeChild(item));
+
+    // 将排序后的列表项重新添加到 DOM 中
+    listItems.forEach(item => eventList.appendChild(item));
+}
+
+// 在事件监听器中调用函数
 contract.events.Voted({
     fromBlock: "genesis"
 }, function (error, event) {
@@ -304,9 +335,8 @@ contract.events.Voted({
 
         if (existingListItem) {
             // Update the existing list item's vote count
-            const voteCount = parseInt(existingListItem.getAttribute('data-votes'));
             existingListItem.setAttribute('data-votes', votes);
-        
+
             // Update the upvote button text
             const upvoteButton = existingListItem.querySelector('button');
             upvoteButton.innerHTML = `${votes} &#9650;`;
@@ -315,5 +345,9 @@ contract.events.Voted({
             const listItem = createListItem(year, eventId, '', voter, 'event-list-item');
             eventList.insertBefore(listItem, eventList.firstChild);
         }
+
+        // 调用排序和渲染函数
+        sortAndRenderList();
     }
 });
+
