@@ -541,7 +541,6 @@ function sortAndRenderList() {
     listItems.forEach(item => eventList.appendChild(item));
 }
 
-// 在事件监听器中调用函数
 contract.events.Voted({
     fromBlock: "genesis"
 }, function (error, event) {
@@ -576,3 +575,39 @@ contract.events.Voted({
     }
 });
 
+contract.events.EventEdited({
+    fromBlock: "genesis"
+}, function (error, event) {
+    if (error) {
+        console.error(error);
+    } else {
+        console.debug("EventEdited", event.returnValues)
+        const year = event.returnValues.year;
+        const eventId = event.returnValues.eventId;
+        const oldDescription = event.returnValues.oldDescription;
+        const newDescription = event.returnValues.newDescription;
+        const editor = event.returnValues.editor;
+
+        // Update the existing list item or create a new one if it doesn't exist
+        const eventList = document.getElementById("eventList");
+        const existingListItem = document.querySelector(`[data-event-id="${eventId}"][data-year="${year}"]`);
+
+        if (existingListItem) {
+            // Update the existing list item's description
+            existingListItem.setAttribute('data-description', newDescription);
+
+            const upvoteButton = existingListItem.querySelector('.description');
+            upvoteButton.textContent = newDescription;
+
+        } else {
+            // Event not found, handle as needed (e.g., log, ignore, or create a new item)
+            console.warn(`Event with ID ${eventId} for year ${year} not found.`);
+            // Event not found, create and prepend the new list item
+            const listItem = createListItem(year, eventId, newDescription, editor, 0);
+            eventList.insertBefore(listItem, eventList.firstChild);
+        }
+
+        // 调用排序和渲染函数
+        sortAndRenderList();
+    }
+});
