@@ -133,11 +133,7 @@ p {
     color: #AD1607; 
     font-weight: bold;
 }
-.eventContainer {
-    margin: 0 auto; /* 居中 */
-    max-width: 600px; /* 最大宽度 */
-    margin-top: 10px;
-}
+
 .instructionText {
     font-size: 14px; /* 更小的字体 */
     color: #999; /* 更浅的颜色 */
@@ -154,8 +150,25 @@ p {
 
     <p class="yearly-events-intro">年度盛事(YearlyEvents)是一款基于区块链技术的产品，旨在创建一个<span class="yearly-events-highlight">不可删除、不受审查</span>的年度事件记录平台。通过区块链的去中心化特性，年度盛事确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，年度盛事都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。</p>
 
+    <style>
+        .eventContainer {
+            margin: 0 auto; /* 居中 */
+            max-width: 600px; /* 最大宽度 */
+            margin-top: 20px;
+            display: flex; /* 使用弹性盒子模型 */
+        }
+        
+        #eventInput {
+            flex: 1; /* 占据剩余空间 */
+            margin: 0; /* 移除默认输入框边距 */
+        }
+        
+        #addButton {
+            margin: 0; /* 移除按钮默认边距 */
+        }
+    </style>
+        
     <div class="eventContainer">
-        <label for="eventInput">添加事件：</label>
         <input type="text" id="eventInput" placeholder="输入事件描述">
         <button id="addButton">添加</button>
     </div>
