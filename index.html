@@ -4,44 +4,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纪元大事件（YearlyEvents）</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
         h1 {
+            color: #3498db;
             text-align: center;
         }
 
-        input[type="text"] {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        div {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
         }
 
         button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
         }
 
-        .user-name {
-            font-size: 0.8rem;
-            opacity: 0.5;
+        button:hover {
+            background-color: #2980b9;
         }
+
+        #eventList {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+/* Remove list-style from li elements */
+#eventList {
+    list-style: none;
+    padding: 0;
+}
+
+/* Style for the upvote button */
+.upvote-button {
+    padding: 6px 10px; /* Adjusted size */
+    font-size: 12px;
+    background-color: #e74c3c; /* Warmer color, you can adjust it */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 3px; /* Rounded corners */
+}
+
+.upvote-button:hover {
+    background-color: #c0392b; /* Darker shade on hover */
+}
+
+/* Style for the event-list-item-year badge */
+.event-list-item-year {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: #3498db; /* Original color, you can adjust it */
+    color: #fff;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+/* Add some margin or padding to li elements for better spacing */
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff; /* Background color for li elements */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation effect */
+}
+li div {
+    margin-top: 1px;
+}
+
     </style>
-    <title>StoneText - 把字刻在赛博石头上</title>
 </head>
 
 <body>
-    <h1>StoneText - 把字刻在赛博石头上</h1>
-    <p>欢迎使用 StoneText！这是一个将文字刻在赛博石头上的应用。在下面的输入框中输入你想刻在石头上的文字，然后点击“存储文字”按钮。</p>
+
+    <h1>纪元大事件（YearlyEvents）</h1>
+
+    <p>纪元大事件（YearlyEvents）是一款基于区块链技术的产品，旨在创建一个不可删除、不受审查的年度事件记录平台。通过区块链的去中心化特性，YearlyEvents确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，YearlyEvents都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。</p>
+
     <div>
-        <label for="input">输入文字：</label>
-        <input type="text" id="input">
-        <button id="storeButton">存储文字</button>
+        <label for="eventInput">添加事件：</label>
+        <input type="text" id="eventInput" placeholder="输入事件描述">
+        <button id="addButton">添加</button>
     </div>
-    <div id="msgError"></div>
-    <ul id="stringList"></ul>
+
+    <div id="eventList">
+        <!-- Event items will be displayed here -->
+    </div>
 
     <p>请先安装MetaMask(小狐狸)插件，并切换到 Sepolia 测试链。
         确保你有足够的测试币，你可以从<a href="https://sepoliafaucet.com/" target="_blank">Sepolia Faucet</a>获取测试币。</p>
