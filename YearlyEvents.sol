@@ -3,6 +3,13 @@
 pragma solidity >=0.8.2 <0.9.0;
 
 contract YearlyEvents {
+        address public contractCreator;
+
+    // 构造函数在合约部署时执行，设置 contractCreator 为部署者的地址
+    constructor() {
+        contractCreator = msg.sender;
+    }
+
     struct Event {
         string description;
         uint256 votes;
@@ -37,7 +44,7 @@ contract YearlyEvents {
         events[year].push(Event(description, 0, msg.sender)); // Store the creator's address
 
         // Transfer to the contract creator
-        payable(msg.sender).transfer(1e14);
+        payable(contractCreator).transfer(1e14);
 
         // Trigger event with creator's address and event ID
         emit EventCreated(year, eventId, description, msg.sender);
@@ -94,7 +101,7 @@ contract YearlyEvents {
         events[year][eventId].description = newDescription;
 
         // Transfer 1e14 wei to the event creator (editor in this case)
-        payable(msg.sender).transfer(1e14);
+        payable(contractCreator).transfer(1e14);
 
         // Trigger the event edited event
         emit EventEdited(year, eventId, oldDescription, newDescription, msg.sender);
