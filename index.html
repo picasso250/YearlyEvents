@@ -120,7 +120,9 @@ span.beta {
         <span class="beta">beta</span>
       </h1>
 
-    <p class="yearly-events-intro">年度盛事(YearlyEvents)是一款基于区块链技术的产品，旨在创建一个<span class="yearly-events-highlight">不可删除、不受审查</span>的年度事件记录平台。通过区块链的去中心化特性，年度盛事确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，年度盛事都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。</p>
+    <p class="yearly-events-intro">年度盛事(YearlyEvents)是一款基于区块链技术的产品，旨在创建一个<span class="yearly-events-highlight">不可删除、不受审查</span>的年度事件记录平台。通过区块链的去中心化特性，年度盛事确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，年度盛事都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。
+    </p>
+    <p class="yearly-events-intro">注意：我们在 Sepolia Testnet.</p>
 
     <style>
         .eventContainer {
@@ -133,6 +135,9 @@ span.beta {
         #eventInput {
             flex: 1; /* 占据剩余空间 */
             margin: 0; /* 移除默认输入框边距 */
+            border-radius: 0;
+            border: 1px solid #bababa;
+            border-right: 0 solid;
         }
         
         #addButton {
@@ -154,6 +159,7 @@ span.beta {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 0;
+    border-radius: 4px;
 }
 
 /* Style for the upvote button */
@@ -167,8 +173,6 @@ span.beta {
     color: #fff;
     border: none;
     cursor: pointer;
-    margin-left: 10px;
-    margin-right: 10px;
     border-radius: 3px; /* Rounded corners */
 }
 
@@ -183,7 +187,6 @@ span.beta {
     font-size: 12px;
     background-color: #3498db; /* Original color, you can adjust it */
     color: #fff;
-    border-radius: 4px;
     margin-right: 4px;
 }
 li {
@@ -228,9 +231,9 @@ li div {
 }
 
 </style>
-    <div id="eventList">
+    <ul id="eventList">
         <!-- Event items will be displayed here -->
-    </div>
+    </ul>
 
     <p class="instructionText">请先安装MetaMask(小狐狸)插件，并切换到 Sepolia 测试链。确保你有足够的测试币，你可以从<a href="https://sepoliafaucet.com/" target="_blank">Alchemy Sepolia Faucet</a>
         或者
