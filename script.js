@@ -2,8 +2,13 @@
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
 // Smart contract address and ABI
-const contractAddress = "0x1Fbaf08ba33989631E000e9d57D5f36f485903E1";
+const contractAddress = "0xEB27D6FC48eC07e07a0dF07671a7809B4458Af41";
 const contractABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -102,6 +107,19 @@ const contractABI = [
 		],
 		"name": "Voted",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "contractCreator",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
