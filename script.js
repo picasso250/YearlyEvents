@@ -13,7 +13,6 @@ async function connectWallet() {
         try {
             await window.ethereum.enable();
             userAccount = (await web3.eth.getAccounts())[0];
-            console.log("Connected:", userAccount);
             if (userAccount) {
                 Array.from(document.querySelectorAll('#eventList li')).forEach((li) => {
                     const creator = li.dataset.creator; // get the value of the "data-creator" attribute
@@ -110,7 +109,6 @@ contract.events.EventCreated({
     if (error) {
         console.error(error);
     } else {
-        console.debug("EventCreated", event.returnValues)
         const year = event.returnValues.year;
         const eventId = event.returnValues.eventId;
         const description = event.returnValues.description;
@@ -169,7 +167,6 @@ contract.events.Voted({
     if (error) {
         console.error(error);
     } else {
-        console.debug("Voted", event.returnValues)
         const year = event.returnValues.year;
         const eventId = event.returnValues.eventId;
         const voter = event.returnValues.voter;
@@ -203,7 +200,6 @@ contract.events.EventEdited({
     if (error) {
         console.error(error);
     } else {
-        console.debug("EventEdited", event.returnValues)
         const year = event.returnValues.year;
         const eventId = event.returnValues.eventId;
         const oldDescription = event.returnValues.oldDescription;
