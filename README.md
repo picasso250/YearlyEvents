@@ -2,32 +2,13 @@ YearlyEvents
 ===
 YearlyEvents是一款基于区块链技术的产品，旨在创建一个不可删除、不受审查的年度事件记录平台。通过区块链的去中心化特性，YearlyEvents确保用户可以安全、透明地记录和分享个人或全球重要的事件。无论是社会变革、创新突破还是个人里程碑，YearlyEvents都提供了一个安全的数字化环境，让用户永久性地存储并分享这些不可磨灭的历史瞬间。
 
-安装与配置:
-===
-1. 克隆YearlyEvents仓库到您的本地计算机。
-   ```
-   git clone https://github.com/picasso250/YearlyEvents.git
-   ```
-
-2. 进入项目目录。
-   ```
-   cd YearlyEvents
-   ```
-
-1. 在项目根目录下，开启一个本地服务，比如使用Python自带的http服务器。
-   ```
-   python -m http.server
-   ```
-
-2. 打开浏览器，访问 http://localhost:8000 ，您将能够访问YearlyEvents应用程序。
-
 使用方法
 ---
-1. 运行服务并打开浏览器，访问 http://localhost:8000 。
+1. 访问 https://picasso250.github.io/YearlyEvents/ 。
 
 3. 在界面中输入您想要记录的年度事件内容。
 
-4. 连接您的区块链钱包，确保您有足够的加密货币用于交易手续费。
+4. 连接您的区块链钱包(MetaMask)，确保您有足够的加密货币用于交易手续费。
 
 5. 点击“添加”按钮，将事件内容写入区块链。
 
