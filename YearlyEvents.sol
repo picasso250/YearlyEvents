@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0
 
+// author: freekindom
+
 pragma solidity >=0.8.2 <0.9.0;
 
 contract YearlyEvents {
-        address public contractCreator;
+    
+    address public contractCreator;
 
     // 构造函数在合约部署时执行，设置 contractCreator 为部署者的地址
     constructor() {
