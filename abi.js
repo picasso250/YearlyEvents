@@ -1,11 +1,6 @@
 
-const contractAddress = "0xEB27D6FC48eC07e07a0dF07671a7809B4458Af41";
+const contractAddress = "0xB338Dd9B255A8bA79f975fEB08270AA4c6C817A9";
 const contractABI = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -106,19 +101,6 @@ const contractABI = [
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "contractCreator",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint16",
@@ -133,7 +115,7 @@ const contractABI = [
 		],
 		"name": "createEvent",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -156,7 +138,7 @@ const contractABI = [
 		],
 		"name": "editEvent",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -227,7 +209,7 @@ const contractABI = [
 		],
 		"name": "vote",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ];

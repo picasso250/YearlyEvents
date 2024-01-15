@@ -26,7 +26,6 @@ async function connectWallet() {
         console.error("MetaMask not found.");
     }
 }
-connectWallet();
 document.getElementById("addButton").addEventListener("click", async () => {
     const input = document.getElementById("eventInput").value;
     const currentYear = new Date().getFullYear(); // 获取当前年份
@@ -37,7 +36,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
     try {
         await contract.methods.createEvent(currentYear, input)
-            .send({ from: userAccount, value: web3.utils.toWei('0.0001', 'ether') });
+            .send({ from: userAccount})
     } catch (error) {
         console.error("Error storing string:", error);
     }
@@ -47,7 +46,7 @@ async function save(year, eventId, newDescription) {
     try {
         // Assuming you have an "editEvent" method in your contract
         await contract.methods.editEvent(year,eventId, newDescription)
-            .send({ from: userAccount, value: web3.utils.toWei('0.0001', 'ether') });
+            .send({ from: userAccount})
     } catch (error) {
         console.error("Error editing event:", error);
     }
@@ -88,7 +87,7 @@ async function vote(year, eventId) {
 
     try {
         // 调用合约的vote方法，并传递year和eventId
-        await contract.methods.vote(year, eventId).send({ from: userAccount, value: '100000000000000' }); // 1e14 wei
+        await contract.methods.vote(year, eventId).send({ from: userAccount})
 
         console.log("Vote successful");
     } catch (error) {
