@@ -5,13 +5,6 @@
 pragma solidity >=0.8.2 <0.9.0;
 
 contract YearlyEvents {
-    
-    address public contractCreator;
-
-    // 构造函数在合约部署时执行，设置 contractCreator 为部署者的地址
-    constructor() {
-        contractCreator = msg.sender;
-    }
 
     struct Event {
         string description;
@@ -39,30 +32,21 @@ contract YearlyEvents {
     );
 
     // Function to create an event for a specific year
-    function createEvent(uint16 year, string memory description) external payable {
+    function createEvent(uint16 year, string memory description) external {
         uint256 eventId = events[year].length;
 
-        require(msg.value == 1e14 , "Must send exactly 1e14 wei to create an event");
-
         events[year].push(Event(description, 0, msg.sender)); // Store the creator's address
-
-        // Transfer to the contract creator
-        payable(contractCreator).transfer(1e14);
 
         // Trigger event with creator's address and event ID
         emit EventCreated(year, eventId, description, msg.sender);
     }
 
     // Function to vote for a specific event in a year
-    function vote(uint16 year, uint256 eventId) external payable {
+    function vote(uint16 year, uint256 eventId) external {
         require(eventId < events[year].length, "Invalid event ID"); // Check if the event ID is valid
-        require(msg.value == 1e14, "Must send exactly 1e14 wei to vote for an event");
 
         // Increment the vote count for the specified event and year
         events[year][eventId].votes += 1;
-
-        // Transfer 1e14 wei to the event creator
-        payable(events[year][eventId].creator).transfer(1e14);
 
         // Get the current vote count for the event
         uint256 currentVotes = events[year][eventId].votes;
@@ -87,24 +71,18 @@ contract YearlyEvents {
     );
 
     // Function to edit an existing event for a specific year
-    function editEvent(uint16 year, uint256 eventId, string memory newDescription) external payable {
+    function editEvent(uint16 year, uint256 eventId, string memory newDescription) external {
         // Check if the event ID is valid
         require(eventId < events[year].length, "Invalid event ID");
 
         // Check if the caller is the creator of the event
         require(msg.sender == events[year][eventId].creator, "Only the event creator can edit the event");
 
-        // Check if the required amount of wei is sent
-        require(msg.value == 1e14, "Must send exactly 1e14 wei to edit an event");
-
         // Save the old description
         string memory oldDescription = events[year][eventId].description;
 
         // Update the event description
         events[year][eventId].description = newDescription;
-
-        // Transfer 1e14 wei to the event creator (editor in this case)
-        payable(contractCreator).transfer(1e14);
 
         // Trigger the event edited event
         emit EventEdited(year, eventId, oldDescription, newDescription, msg.sender);
